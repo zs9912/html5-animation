@@ -30,11 +30,19 @@
         window.requestAnimationFrame(drawFrame, canvas);
         
         context.beginPath();
+		if(xpos > canvas.width){
+			xpos = 0;
+			ypos = centerY;
+			angle = 0;
+		}
         context.moveTo(xpos, ypos);
         //Calculate the new position.
         xpos += xspeed;
         angle += yspeed;
-        ypos = centerY + Math.sin(angle) * range;
+		if(angle>2*Math.PI){
+			angle = 0;
+		}
+        ypos = centerY + Math.sin(angle) * range;		
         context.lineTo(xpos, ypos);
         context.stroke();
       }());
